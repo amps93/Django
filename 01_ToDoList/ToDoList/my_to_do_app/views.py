@@ -16,10 +16,18 @@ def createTodo(request):
     new_todo.save()
     return HttpResponseRedirect(reverse('index'))
     # return HttpResponse('입력 내용 %s' % user_input_str)
-
-def doneTodo(request):
+'''
+def deleteTodo(request):
     done_todo_id = request.GET['todoNum']
     print('완료한 todo의 id', done_todo_id)
     todo = Todo.objects.get(id = done_todo_id)
     todo.delete()
+    return HttpResponseRedirect(reverse('index'))
+'''
+def doneTodo(request):
+    done_todo_id = request.GET['todoNum']
+    print('완료한 todo의 id', done_todo_id)
+    todo = Todo.objects.get(id = done_todo_id)
+    todo.isDone = True
+    todo.save()
     return HttpResponseRedirect(reverse('index'))
